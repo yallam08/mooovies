@@ -25,3 +25,10 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    dagger2Version = "2.13"
+    moshiKotlinVersion = "1.5.0"
+    archVersion = "1.1.1"
+    roomVersion = "1.1.0"
+}
