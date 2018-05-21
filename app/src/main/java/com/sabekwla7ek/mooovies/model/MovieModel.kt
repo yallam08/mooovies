@@ -1,4 +1,4 @@
-package com.sabekwla7ek.model
+package com.sabekwla7ek.mooovies.model
 
 import com.squareup.moshi.Json
 

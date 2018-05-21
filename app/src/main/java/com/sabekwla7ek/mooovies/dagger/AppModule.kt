@@ -1,6 +1,6 @@
 package com.sabekwla7ek.mooovies.dagger
 
-import com.sabekwla7ek.base.MoooviesApplication
+import com.sabekwla7ek.mooovies.base.MoooviesApplication
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

@@ -1,4 +1,4 @@
-package com.sabekwla7ek.base
+package com.sabekwla7ek.mooovies.base
 
 import android.app.Application
 import com.sabekwla7ek.mooovies.dagger.AppModule

@@ -1,6 +1,6 @@
 package com.sabekwla7ek.mooovies.data.remote
 
-import com.sabekwla7ek.model.MovieModel
+import com.sabekwla7ek.mooovies.model.MovieModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
