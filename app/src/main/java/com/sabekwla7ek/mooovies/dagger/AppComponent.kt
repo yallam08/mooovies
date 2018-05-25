@@ -1,6 +1,7 @@
 package com.sabekwla7ek.mooovies.dagger
 
 import com.sabekwla7ek.mooovies.base.MoooviesApplication
+import com.sabekwla7ek.mooovies.vvm.movieslist.MoviesListFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -13,4 +14,5 @@ import javax.inject.Singleton
 )
 interface AppComponent {
     fun inject(app: MoooviesApplication)
+    fun inject(moviesListFragment: MoviesListFragment)
 }

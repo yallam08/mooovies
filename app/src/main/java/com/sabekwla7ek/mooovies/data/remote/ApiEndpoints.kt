@@ -1,6 +1,6 @@
 package com.sabekwla7ek.mooovies.data.remote
 
-import com.sabekwla7ek.mooovies.model.MovieModel
+import com.sabekwla7ek.mooovies.model.ResponseModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -10,7 +10,7 @@ import retrofit2.http.Query
  */
 interface ApiEndpoints {
 
-    @GET
-    fun getMovies(@Query("sort_by") sortBy: String): Single<List<MovieModel>>
+    @GET("popular/")
+    fun getMovies(@Query("sort_by") sortBy: String? = null): Single<ResponseModel>
 
 }

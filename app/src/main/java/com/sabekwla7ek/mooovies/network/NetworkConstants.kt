@@ -1,5 +1,7 @@
 package com.sabekwla7ek.mooovies.network
 
+import com.sabekwla7ek.mooovies.BuildConfig
+
 /**
  * Created by Yahia Allam on 21/05/2018
  */
@@ -10,6 +12,6 @@ class NetworkConstants {
         const val DETAILS_MOVIE_POSTER_URL_BASE = "http://image.tmdb.org/t/p/w342/"
 
         const val API_KEY_KEY = "api_key"
-        const val API_KEY = ""
+        const val API_KEY = BuildConfig.TMDB_API_KEY
     }
 }
