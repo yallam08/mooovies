@@ -23,5 +23,14 @@ data class MovieModel(
         val voteAverage: Double,
 
         @field:Json(name = "release_date")
-        val releaseDate: String
+        val releaseDate: String,
+
+        @field:Json(name = "vote_count")
+        val voteCount: Int,
+
+        @field:Json(name = "poster_path")
+        val posterPath: String,
+
+        @field:Json(name = "backdrop_path")
+        val backdropPath: String
 )

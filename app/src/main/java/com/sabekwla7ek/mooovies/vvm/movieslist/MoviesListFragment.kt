@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import android.widget.Toast
 import androidx.core.widget.toast
 import com.sabekwla7ek.mooovies.R
 import dagger.android.support.AndroidSupportInjection
+import kotlinx.android.synthetic.main.fragment_movies_list.*
 import javax.inject.Inject
 
 class MoviesListFragment : Fragment() {
@@ -19,7 +21,9 @@ class MoviesListFragment : Fragment() {
     @Inject
     lateinit var moviesListViewModelFactory: MoviesListViewModelFactory
 
-    lateinit var moviesListViewModel: MoviesListViewModel
+    private lateinit var moviesListViewModel: MoviesListViewModel
+
+    private lateinit var moviesListAdapter: MoviesListRecyclerViewAdapter
 
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
@@ -34,17 +38,34 @@ class MoviesListFragment : Fragment() {
         moviesListViewModel =
                 ViewModelProviders.of(this, moviesListViewModelFactory)
                         .get(MoviesListViewModel::class.java)
-
         setupObservers()
-
         moviesListViewModel.getMovies()
 
         return rootView
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initMoviesRecyclerView()
+    }
+
+    private fun initMoviesRecyclerView() {
+        moviesListAdapter = MoviesListRecyclerViewAdapter(
+                movies = moviesListViewModel.moviesLiveData.value ?: ArrayList(),
+                context = requireContext()
+        )
+        rv_movies_list.layoutManager = GridLayoutManager(activity, 3)
+        rv_movies_list.setHasFixedSize(true)
+        rv_movies_list.adapter = moviesListAdapter
+    }
+
     private fun setupObservers() {
         moviesListViewModel.moviesLiveData.observe(this, Observer {
-            activity?.toast("Movies count: ${it?.count()}", Toast.LENGTH_LONG)
+            if (it != null) {
+                moviesListAdapter.movies = it
+                moviesListAdapter.notifyDataSetChanged()
+            }
         })
 
         moviesListViewModel.errorLiveData.observe(this, Observer {
