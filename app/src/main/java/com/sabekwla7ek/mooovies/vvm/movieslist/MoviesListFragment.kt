@@ -12,20 +12,28 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.toast
 import com.sabekwla7ek.mooovies.R
+import com.sabekwla7ek.mooovies.vvm.FragmentNavigator
+import com.sabekwla7ek.mooovies.vvm.moviedetails.MovieDetailsFragment
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 import javax.inject.Inject
 
 class MoviesListFragment : Fragment() {
 
+    lateinit var fragmentNavigator: FragmentNavigator
+
     @Inject
     lateinit var moviesListViewModelFactory: MoviesListViewModelFactory
-
     private lateinit var moviesListViewModel: MoviesListViewModel
-
     private lateinit var moviesListAdapter: MoviesListRecyclerViewAdapter
 
     override fun onAttach(context: Context?) {
+        try {
+            fragmentNavigator = activity as FragmentNavigator
+        } catch (e: ClassCastException) {
+            throw ClassCastException(activity.toString() + " must implement " + FragmentNavigator::class.simpleName)
+        }
+
         AndroidSupportInjection.inject(this)
 
         return super.onAttach(context)
@@ -39,7 +47,7 @@ class MoviesListFragment : Fragment() {
                 ViewModelProviders.of(this, moviesListViewModelFactory)
                         .get(MoviesListViewModel::class.java)
         setupObservers()
-        moviesListViewModel.getMovies()
+        moviesListViewModel.getMovies() //TODO: implement loading indicator
 
         return rootView
     }
@@ -52,8 +60,9 @@ class MoviesListFragment : Fragment() {
 
     private fun initMoviesRecyclerView() {
         moviesListAdapter = MoviesListRecyclerViewAdapter(
+                context = requireContext(),
                 movies = moviesListViewModel.moviesLiveData.value ?: ArrayList(),
-                context = requireContext()
+                clickCallback = this::moviesGridItemClickCallback
         )
         rv_movies_list.layoutManager = GridLayoutManager(activity, 3)
         rv_movies_list.setHasFixedSize(true)
@@ -71,6 +80,14 @@ class MoviesListFragment : Fragment() {
         moviesListViewModel.errorLiveData.observe(this, Observer {
             activity?.toast("ERROR: $it", Toast.LENGTH_LONG)
         })
+    }
+
+    private fun moviesGridItemClickCallback(movieId: Int) {
+        val movieDetailsFragment = MovieDetailsFragment()
+        val bundle = Bundle()
+        bundle.putInt(MovieDetailsFragment.ARG_MOVIE_ID, movieId)
+        movieDetailsFragment.arguments = bundle
+        fragmentNavigator.navigateToFragment(movieDetailsFragment)
     }
 
 }

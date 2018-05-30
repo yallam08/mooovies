@@ -22,6 +22,7 @@ class MoooviesApplication : Application(), HasActivityInjector {
     override fun activityInjector(): AndroidInjector<Activity> {
         return activityInjector
     }
+
     override fun onCreate() {
         super.onCreate()
 

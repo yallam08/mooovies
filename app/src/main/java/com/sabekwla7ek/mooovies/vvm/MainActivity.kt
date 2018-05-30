@@ -11,7 +11,7 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
+class MainActivity : AppCompatActivity(), FragmentNavigator, HasSupportFragmentInjector {
 
     @Inject
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
@@ -28,10 +28,15 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         replaceFragment(MoviesListFragment())
     }
 
+    override fun navigateToFragment(fragment: Fragment) {
+        replaceFragment(fragment)
+    }
+
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager
                 .beginTransaction()
                 .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
                 .commit()
     }
 }

@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="movies_list_item_card_elevation">10dp</dimen>
+    <dimen name="movies_list_item_margin">5dp</dimen>
+    <dimen name="movies_list_item_title_padding">5dp</dimen>
+    <dimen name="movies_list_item_title_text_size">13sp</dimen>
 </resources>

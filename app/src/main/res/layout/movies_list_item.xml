@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view_movies_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
+    android:layout_margin="@dimen/movies_list_item_margin"
     app:cardElevation="@dimen/movies_list_item_card_elevation">
 
     <android.support.constraint.ConstraintLayout
@@ -27,10 +28,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#cc222222"
-            android:padding="5dp"
+            android:padding="@dimen/movies_list_item_title_padding"
             android:textAlignment="center"
             android:textColor="@android:color/white"
-            android:textSize="13sp"
+            android:textSize="@dimen/movies_list_item_title_text_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
