@@ -21,13 +21,13 @@ class MoviesRepository @Inject constructor(
     fun getMovies(): Observable<List<MovieModel>> {
         return apiEndpoints.getMovies().toObservable()
                 .flatMap { t -> Observable.just(t.results) }
-                .onErrorResumeNext({ throwable: Throwable ->
+                .onErrorResumeNext { throwable: Throwable ->
                     if (throwable is IOException) {
                         return@onErrorResumeNext getMoviesFromDb()
                     } else {
                         return@onErrorResumeNext Observable.error(throwable)
                     }
-                }).doOnNext {
+                }.doOnNext {
                     it.forEach {
                         moviesDao.insertMovie(it)
                     }

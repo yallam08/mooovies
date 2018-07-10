@@ -21,7 +21,7 @@ import com.sabekwla7ek.mooovies.network.NetworkConstants
 class MoviesListRecyclerViewAdapter(
         private val context: Context,
         var movies: List<MovieModel>,
-        private val clickCallback: (movieId: Int) -> Unit
+        private val clickCallback: (movieId: Int, clickedImageView: ImageView) -> Unit
 ) : RecyclerView.Adapter<MoviesListRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesListRecyclerViewHolder {
@@ -38,9 +38,10 @@ class MoviesListRecyclerViewAdapter(
                 .load(Uri.parse(NetworkConstants.GRID_MOVIE_POSTER_URL_BASE + movie.posterPath))
                 .error(R.drawable.movie_grid_placeholder)
                 .into(holder.imageViewMovieImage)
+        holder.imageViewMovieImage.transitionName = movie.posterPath
 
         holder.cardViewItemContainer.setOnClickListener {
-            clickCallback.invoke(movie.id)
+            clickCallback.invoke(movie.id, holder.imageViewMovieImage)
         }
     }
 }

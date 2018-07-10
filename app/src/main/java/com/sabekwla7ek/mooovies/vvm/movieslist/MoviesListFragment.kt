@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.widget.toast
 import com.sabekwla7ek.mooovies.R
@@ -16,6 +17,7 @@ import com.sabekwla7ek.mooovies.vvm.FragmentNavigator
 import com.sabekwla7ek.mooovies.vvm.moviedetails.MovieDetailsFragment
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_movies_list.*
+import java.util.*
 import javax.inject.Inject
 
 class MoviesListFragment : Fragment() {
@@ -82,12 +84,11 @@ class MoviesListFragment : Fragment() {
         })
     }
 
-    private fun moviesGridItemClickCallback(movieId: Int) {
+    private fun moviesGridItemClickCallback(movieId: Int, clickedImageView: ImageView) {
         val movieDetailsFragment = MovieDetailsFragment()
         val bundle = Bundle()
         bundle.putInt(MovieDetailsFragment.ARG_MOVIE_ID, movieId)
         movieDetailsFragment.arguments = bundle
-        fragmentNavigator.navigateToFragment(movieDetailsFragment)
+        fragmentNavigator.navigateToFragmentAndSaveState(this, movieDetailsFragment, clickedImageView)
     }
-
 }
