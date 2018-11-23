@@ -1,7 +1,7 @@
 package com.sabekwla7ek.mooovies.vvm
 
-import android.support.v4.app.Fragment
 import android.view.View
+import androidx.fragment.app.Fragment
 
 /**
  * Created by Yahia Allam on 30/05/2018

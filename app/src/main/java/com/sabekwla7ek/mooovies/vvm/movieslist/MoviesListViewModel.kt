@@ -1,7 +1,7 @@
 package com.sabekwla7ek.mooovies.vvm.movieslist
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.sabekwla7ek.mooovies.data.MoviesRepository
 import com.sabekwla7ek.mooovies.model.MovieModel
 import io.reactivex.disposables.Disposable

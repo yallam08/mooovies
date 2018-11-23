@@ -1,17 +1,15 @@
 package com.sabekwla7ek.mooovies.vvm.movieslist
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.widget.toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.sabekwla7ek.mooovies.R
 import com.sabekwla7ek.mooovies.vvm.FragmentNavigator
 import com.sabekwla7ek.mooovies.vvm.moviedetails.MovieDetailsFragment
@@ -22,7 +20,7 @@ import javax.inject.Inject
 
 class MoviesListFragment : Fragment() {
 
-    lateinit var fragmentNavigator: FragmentNavigator
+    private lateinit var fragmentNavigator: FragmentNavigator
 
     @Inject
     lateinit var moviesListViewModelFactory: MoviesListViewModelFactory
@@ -66,7 +64,7 @@ class MoviesListFragment : Fragment() {
                 movies = moviesListViewModel.moviesLiveData.value ?: ArrayList(),
                 clickCallback = this::moviesGridItemClickCallback
         )
-        rv_movies_list.layoutManager = GridLayoutManager(activity, 3)
+        rv_movies_list.layoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 3)
         rv_movies_list.setHasFixedSize(true)
         rv_movies_list.adapter = moviesListAdapter
     }
@@ -80,7 +78,7 @@ class MoviesListFragment : Fragment() {
         })
 
         moviesListViewModel.errorLiveData.observe(this, Observer {
-            activity?.toast("ERROR: $it", Toast.LENGTH_LONG)
+            Toast.makeText(activity, "ERROR: $it", Toast.LENGTH_LONG).show()
         })
     }
 

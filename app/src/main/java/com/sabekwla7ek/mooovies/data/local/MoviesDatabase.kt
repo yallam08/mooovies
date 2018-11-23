@@ -1,7 +1,7 @@
 package com.sabekwla7ek.mooovies.data.local
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import com.sabekwla7ek.mooovies.model.MovieModel
 
 /**

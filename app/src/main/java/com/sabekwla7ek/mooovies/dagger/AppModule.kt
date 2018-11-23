@@ -1,6 +1,6 @@
 package com.sabekwla7ek.mooovies.dagger
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import com.sabekwla7ek.mooovies.base.MoooviesApplication
 import com.sabekwla7ek.mooovies.data.local.MoviesDao
 import com.sabekwla7ek.mooovies.data.local.MoviesDatabase

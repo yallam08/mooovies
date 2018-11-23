@@ -2,8 +2,6 @@ package com.sabekwla7ek.mooovies.vvm.movieslist
 
 import android.content.Context
 import android.net.Uri
-import android.support.v7.widget.CardView
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +20,7 @@ class MoviesListRecyclerViewAdapter(
         private val context: Context,
         var movies: List<MovieModel>,
         private val clickCallback: (movieId: Int, clickedImageView: ImageView) -> Unit
-) : RecyclerView.Adapter<MoviesListRecyclerViewHolder>() {
+) : androidx.recyclerview.widget.RecyclerView.Adapter<MoviesListRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesListRecyclerViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.movies_list_item, parent, false)
@@ -46,8 +44,8 @@ class MoviesListRecyclerViewAdapter(
     }
 }
 
-class MoviesListRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-    val cardViewItemContainer: CardView = view.findViewById(R.id.card_view_movies_list_item)
+class MoviesListRecyclerViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
+    val cardViewItemContainer: androidx.cardview.widget.CardView = view.findViewById(R.id.card_view_movies_list_item)
     val imageViewMovieImage: ImageView = view.findViewById(R.id.image_view_movies_list_item_image)
     val textViewMovieTitle: TextView = view.findViewById(R.id.text_view_movies_list_item_title)
 }

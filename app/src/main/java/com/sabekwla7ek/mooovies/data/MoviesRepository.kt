@@ -23,13 +23,14 @@ class MoviesRepository @Inject constructor(
                 .flatMap { t -> Observable.just(t.results) }
                 .onErrorResumeNext { throwable: Throwable ->
                     if (throwable is IOException) {
+                        //TODO: what if db is empty?
                         return@onErrorResumeNext getMoviesFromDb()
                     } else {
                         return@onErrorResumeNext Observable.error(throwable)
                     }
                 }.doOnNext {
-                    it.forEach {
-                        moviesDao.insertMovie(it)
+                    it.forEach { movie ->
+                        moviesDao.insertMovie(movie)
                     }
                 }
     }

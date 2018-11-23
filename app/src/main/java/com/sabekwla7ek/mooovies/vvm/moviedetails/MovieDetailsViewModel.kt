@@ -1,6 +1,6 @@
 package com.sabekwla7ek.mooovies.vvm.moviedetails
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 import com.sabekwla7ek.mooovies.data.MoviesRepository
 import javax.inject.Inject
 
