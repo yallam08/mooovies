@@ -5,12 +5,11 @@ import com.sabekwla7ek.mooovies.data.remote.ApiEndpoints
 import com.sabekwla7ek.mooovies.model.MovieModel
 import io.reactivex.Observable
 import java.io.IOException
-import javax.inject.Inject
 
 /**
  * Created by Yahia Allam on 25/05/2018
  */
-class MoviesRepository @Inject constructor(
+class MoviesRepository constructor(
         private val moviesDao: MoviesDao, private val apiEndpoints: ApiEndpoints
 ) {
     /**

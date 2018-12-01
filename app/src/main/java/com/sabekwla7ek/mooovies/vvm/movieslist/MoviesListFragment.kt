@@ -9,22 +9,19 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import com.sabekwla7ek.mooovies.R
 import com.sabekwla7ek.mooovies.vvm.FragmentNavigator
 import com.sabekwla7ek.mooovies.vvm.moviedetails.MovieDetailsFragment
-import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_movies_list.*
+import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
-import javax.inject.Inject
 
 class MoviesListFragment : Fragment() {
 
     private lateinit var fragmentNavigator: FragmentNavigator
 
-    @Inject
-    lateinit var moviesListViewModelFactory: MoviesListViewModelFactory
-    private lateinit var moviesListViewModel: MoviesListViewModel
+    private val moviesListViewModel: MoviesListViewModel by viewModel()
     private lateinit var moviesListAdapter: MoviesListRecyclerViewAdapter
 
     override fun onAttach(context: Context?) {
@@ -34,7 +31,6 @@ class MoviesListFragment : Fragment() {
             throw ClassCastException(activity.toString() + " must implement " + FragmentNavigator::class.simpleName)
         }
 
-        AndroidSupportInjection.inject(this)
 
         return super.onAttach(context)
     }
@@ -43,9 +39,6 @@ class MoviesListFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val rootView = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
-        moviesListViewModel =
-                ViewModelProviders.of(this, moviesListViewModelFactory)
-                        .get(MoviesListViewModel::class.java)
         setupObservers()
         moviesListViewModel.getMovies() //TODO: implement loading indicator
 
@@ -64,7 +57,7 @@ class MoviesListFragment : Fragment() {
                 movies = moviesListViewModel.moviesLiveData.value ?: ArrayList(),
                 clickCallback = this::moviesGridItemClickCallback
         )
-        rv_movies_list.layoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 3)
+        rv_movies_list.layoutManager = GridLayoutManager(activity, 3)
         rv_movies_list.setHasFixedSize(true)
         rv_movies_list.adapter = moviesListAdapter
     }

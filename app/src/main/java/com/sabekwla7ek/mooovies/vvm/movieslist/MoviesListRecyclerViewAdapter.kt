@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
+import androidx.recyclerview.widget.RecyclerView
 import com.sabekwla7ek.mooovies.R
 import com.sabekwla7ek.mooovies.base.GlideApp
 import com.sabekwla7ek.mooovies.extfun.getShortenedDotted
@@ -20,7 +22,7 @@ class MoviesListRecyclerViewAdapter(
         private val context: Context,
         var movies: List<MovieModel>,
         private val clickCallback: (movieId: Int, clickedImageView: ImageView) -> Unit
-) : androidx.recyclerview.widget.RecyclerView.Adapter<MoviesListRecyclerViewHolder>() {
+) : RecyclerView.Adapter<MoviesListRecyclerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MoviesListRecyclerViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.movies_list_item, parent, false)
@@ -44,8 +46,8 @@ class MoviesListRecyclerViewAdapter(
     }
 }
 
-class MoviesListRecyclerViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
-    val cardViewItemContainer: androidx.cardview.widget.CardView = view.findViewById(R.id.card_view_movies_list_item)
+class MoviesListRecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    val cardViewItemContainer: CardView = view.findViewById(R.id.card_view_movies_list_item)
     val imageViewMovieImage: ImageView = view.findViewById(R.id.image_view_movies_list_item_image)
     val textViewMovieTitle: TextView = view.findViewById(R.id.text_view_movies_list_item_title)
 }
