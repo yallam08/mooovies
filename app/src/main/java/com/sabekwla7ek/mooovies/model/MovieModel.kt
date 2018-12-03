@@ -32,5 +32,5 @@ data class MovieModel(
         val posterPath: String,
 
         @field:Json(name = "backdrop_path")
-        val backdropPath: String
+        val backdropPath: String?
 )

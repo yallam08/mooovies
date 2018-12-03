@@ -13,13 +13,19 @@ import io.reactivex.schedulers.Schedulers
 class MoviesListViewModel constructor(private val moviesRepository: MoviesRepository) : ViewModel() {
     val moviesLiveData = MutableLiveData<List<MovieModel>>()
     val errorLiveData = MutableLiveData<String>()
+    val loadingLiveData = MutableLiveData<Boolean>()
 
     fun getMovies(): Disposable =
             moviesRepository.getMovies()
+                    .doOnSubscribe {
+                        loadingLiveData.postValue(true)
+                    }
                     .subscribeOn(Schedulers.io())
                     .subscribe({
                         moviesLiveData.postValue(it)
+                        loadingLiveData.postValue(false)
                     }, {
                         errorLiveData.postValue(it.message)
+                        loadingLiveData.postValue(false)
                     })
 }

@@ -4,6 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
@@ -28,9 +30,8 @@ class MoviesListFragment : Fragment() {
         try {
             fragmentNavigator = activity as FragmentNavigator
         } catch (e: ClassCastException) {
-            throw ClassCastException(activity.toString() + " must implement " + FragmentNavigator::class.simpleName)
+            throw ClassCastException("${activity.toString()} must implement ${FragmentNavigator::class.simpleName}")
         }
-
 
         return super.onAttach(context)
     }
@@ -40,11 +41,12 @@ class MoviesListFragment : Fragment() {
         val rootView = inflater.inflate(R.layout.fragment_movies_list, container, false)
 
         setupObservers()
-        moviesListViewModel.getMovies() //TODO: implement loading indicator
+        moviesListViewModel.getMovies()
 
         return rootView
     }
 
+    // Called immediately after onCreateView(..)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,6 +65,16 @@ class MoviesListFragment : Fragment() {
     }
 
     private fun setupObservers() {
+        moviesListViewModel.loadingLiveData.observe(this, Observer {
+            if (it) {
+                progress_bar.visibility = VISIBLE
+                rv_movies_list.visibility = GONE
+            } else {
+                progress_bar.visibility = GONE
+                rv_movies_list.visibility = VISIBLE
+            }
+        })
+
         moviesListViewModel.moviesLiveData.observe(this, Observer {
             if (it != null) {
                 moviesListAdapter.movies = it
