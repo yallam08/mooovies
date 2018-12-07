@@ -59,31 +59,31 @@ class MoviesListFragment : Fragment() {
                 movies = moviesListViewModel.moviesLiveData.value ?: ArrayList(),
                 clickCallback = this::moviesGridItemClickCallback
         )
-        rv_movies_list.layoutManager = GridLayoutManager(activity, 3)
-        rv_movies_list.setHasFixedSize(true)
-        rv_movies_list.adapter = moviesListAdapter
+        rvMoviesList.layoutManager = GridLayoutManager(activity, 3)
+        rvMoviesList.setHasFixedSize(true)
+        rvMoviesList.adapter = moviesListAdapter
     }
 
     private fun setupObservers() {
-        moviesListViewModel.loadingLiveData.observe(this, Observer {
-            if (it) {
-                progress_bar.visibility = VISIBLE
-                rv_movies_list.visibility = GONE
+        moviesListViewModel.loadingLiveData.observe(this, Observer { isLoading ->
+            if (isLoading) {
+                progressBarLoading.visibility = VISIBLE
+                rvMoviesList.visibility = GONE
             } else {
-                progress_bar.visibility = GONE
-                rv_movies_list.visibility = VISIBLE
+                progressBarLoading.visibility = GONE
+                rvMoviesList.visibility = VISIBLE
             }
         })
 
-        moviesListViewModel.moviesLiveData.observe(this, Observer {
-            if (it != null) {
-                moviesListAdapter.movies = it
+        moviesListViewModel.moviesLiveData.observe(this, Observer { moviesList ->
+            if (moviesList != null) {
+                moviesListAdapter.movies = moviesList
                 moviesListAdapter.notifyDataSetChanged()
             }
         })
 
-        moviesListViewModel.errorLiveData.observe(this, Observer {
-            Toast.makeText(activity, "ERROR: $it", Toast.LENGTH_LONG).show()
+        moviesListViewModel.errorLiveData.observe(this, Observer { errorStr ->
+            Toast.makeText(activity, "ERROR: $errorStr", Toast.LENGTH_LONG).show()
         })
     }
 
