@@ -14,7 +14,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/image_view_movies_list_item_image"
+            android:id="@+id/imageViewMoviesListItemImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -24,7 +24,7 @@
             tools:src="@drawable/movie_grid_placeholder" />
 
         <TextView
-            android:id="@+id/text_view_movies_list_item_title"
+            android:id="@+id/textViewMoviesListItemTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#cc222222"

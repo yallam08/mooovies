@@ -14,4 +14,7 @@ interface MoviesDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMovie(movie: MovieModel)
+
+    @Query("SELECT * FROM movie WHERE id = :movieId")
+    fun getMovieById(movieId: Int): Single<MovieModel>
 }

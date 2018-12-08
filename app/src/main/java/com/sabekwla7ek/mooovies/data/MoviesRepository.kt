@@ -4,6 +4,7 @@ import com.sabekwla7ek.mooovies.data.local.MoviesDao
 import com.sabekwla7ek.mooovies.data.remote.ApiEndpoints
 import com.sabekwla7ek.mooovies.model.MovieModel
 import io.reactivex.Observable
+import io.reactivex.Single
 import java.io.IOException
 
 /**
@@ -34,7 +35,12 @@ class MoviesRepository constructor(
                 }
     }
 
+    fun getMovieById(movieId: Int): Single<MovieModel> {
+        return moviesDao.getMovieById(movieId)
+    }
+
     private fun getMoviesFromDb(): Observable<List<MovieModel>> {
         return moviesDao.getMovies().toObservable()
     }
+
 }
